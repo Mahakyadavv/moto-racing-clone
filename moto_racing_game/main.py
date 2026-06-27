@@ -1,5 +1,6 @@
 import os
 import random
+
 import pygame
 
 
@@ -26,6 +27,7 @@ def asset_path(name):
 def load_scaled_image(path, size, alpha=True):
     if not os.path.exists(path):
         return None
+
     img = pygame.image.load(path)
     img = img.convert_alpha() if alpha else img.convert()
     return pygame.transform.smoothscale(img, size)
@@ -34,6 +36,7 @@ def load_scaled_image(path, size, alpha=True):
 def tile_vertical(screen, image, offset_y):
     h = image.get_height()
     y = -h + (offset_y % h)
+
     while y < HEIGHT:
         screen.blit(image, (0, y))
         y += h
@@ -191,10 +194,10 @@ class Game:
             pygame.draw.line(self.screen, WHITE, (ROAD_LEFT, 0), (ROAD_LEFT, HEIGHT), 4)
             pygame.draw.line(self.screen, WHITE, (ROAD_RIGHT, 0), (ROAD_RIGHT, HEIGHT), 4)
 
-            y = -60 + self.lane_offset
-            while y < HEIGHT:
-                pygame.draw.rect(self.screen, YELLOW, (WIDTH // 2 - 4, y, 8, 36), border_radius=3)
-                y += 60
+        y = -60 + self.lane_offset
+        while y < HEIGHT:
+            pygame.draw.rect(self.screen, YELLOW, (WIDTH // 2 - 4, y, 8, 36), border_radius=3)
+            y += 60
 
     def draw_ui(self):
         score_text = self.font.render(f"Score: {self.score}", True, WHITE)
